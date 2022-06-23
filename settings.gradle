@@ -1,0 +1,3 @@
+include ':litongjava-android-utils'
+include ':app'
+rootProject.name = "litongjava-android-utils"
