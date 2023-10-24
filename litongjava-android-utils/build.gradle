@@ -33,14 +33,14 @@ android {
 dependencies {
   //implementation 'androidx.appcompat:appcompat:1.1.0'
   //logback
-  implementation 'org.slf4j:slf4j-api:1.7.25'
-  implementation 'com.github.tony19:logback-android:2.0.0'
+  implementation 'org.slf4j:slf4j-api:2.0.9'
+  implementation 'com.github.tony19:logback-android:3.0.0'
   //utilcode
-  implementation 'com.blankj:utilcode:1.30.6'
+  implementation 'com.blankj:utilcode:1.30.7'
   //gso
-  implementation 'com.google.code.gson:gson:2.8.1'
+  implementation 'com.google.code.gson:gson:2.10.1'
   //acp
-  implementation 'com.mylhyl:acp:1.1.5'
+  implementation 'com.mylhyl:acp:1.2.0'
 }
 
 // 生成jar包的task
@@ -53,12 +53,12 @@ artifacts {
   archives sourcesJar
 }
 // 签名
-signing {
-  sign configurations.archives
-}
+//signing {
+//  sign configurations.archives
+//}
 
 uploadArchives {
-  /*
+
   repositories {
     mavenDeployer {
       //repository(url: LOCAL_REPO_URL)
@@ -85,8 +85,9 @@ uploadArchives {
         }
       }
     }
-  }*/
+  }
 
+  /*
   repositories {
     mavenDeployer {
       beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
@@ -130,5 +131,5 @@ uploadArchives {
       }
     }
   }
-  
+ */ 
 }

@@ -20,7 +20,7 @@ public class BitmapUtils {
 
   /**
    * 将多张图片合并为一张图片
-   *
+   * 默认是横向合并
    * @param text
    * @param list
    * @return
@@ -28,14 +28,33 @@ public class BitmapUtils {
 
   public static Bitmap merge(String text, List<Bitmap> list) {
 
+    return merge(text, list, 0);
+  }
+
+  /**
+   *
+   * @param text
+   * @param list
+   * @param orientation 合并方向 0 横向 1 竖向
+   * @return
+   */
+  public static Bitmap merge(String text, List<Bitmap> list,int orientation) {
     int size = list.size();
     Bitmap bitmap01 = list.get(0);
     //1.计算宽高
     int srcWidth = bitmap01.getWidth();
     int srcHeight = bitmap01.getHeight();
 
-    int dstWidth = srcWidth * size;
-    int dstHeight = srcHeight;
+    int dstWidth=0;
+    int dstHeight=0;
+    if(orientation==0){
+      dstWidth = srcWidth * size;
+      dstHeight = srcHeight;
+    }else{
+      dstWidth = srcWidth;
+      dstHeight = srcHeight*size;
+    }
+
 
     //2.创建空白的bitmap
     Bitmap dstBitmap = Bitmap.createBitmap(dstWidth, dstHeight, bitmap01.getConfig());
@@ -46,7 +65,14 @@ public class BitmapUtils {
     Paint paint = new Paint();
     //绘制图片
     for (int i = 0; i < size; i++) {
-      canvas.drawBitmap(list.get(i), srcWidth * i, 0, paint);
+      //横向拼接
+      if(orientation==0){
+        canvas.drawBitmap(list.get(i), srcWidth * i, 0, paint);
+      }
+      //竖向拼接
+      else{
+        canvas.drawBitmap(list.get(i), 0, srcHeight*i, paint);
+      }
     }
     //绘制字体
     paint.setTextSize(100);
